@@ -21,6 +21,7 @@ def create_app(configuracion=None):
     if configuracion is not None and configuracion["TESTING"]:
         app.config['SQLALCHEMY_DATABASE_URI'] =\
             'sqlite:///' + configuracion["DATABASE"]
+    
     # Configuracion de BD
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] =\

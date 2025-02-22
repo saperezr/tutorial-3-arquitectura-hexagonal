@@ -1,20 +1,28 @@
+import json
 import os
 import tempfile
 
 import pytest
-import json
 
 from aeroalpes.api import create_app, importar_modelos_alchemy
-from aeroalpes.config.db import init_db
-from aeroalpes.config.db import db
+from aeroalpes.config.db import db, init_db
+
+db_dir = os.path.abspath(os.path.dirname(__file__))
+unique_db_path = None
+unique_db_fd = 0
 
 @pytest.fixture
 def app():
     """Create and configure a new app instance for each test."""
-    # create a temporary file to isolate the database for each test
-    db_fd, db_path = tempfile.mkstemp()
+    
+    global unique_db_path, unique_db_fd
+    if unique_db_path is None:
+        # create a temporary file to isolate the database for each test
+        db_fd, db_path = tempfile.mkstemp(dir = db_dir, suffix = ".db")
+        unique_db_path = db_path
+        unique_db_fd = db_fd
     # create the app with common test config
-    app = create_app({"TESTING": True, "DATABASE": db_path})
+    app = create_app({"TESTING": True, "DATABASE": unique_db_path})
 
     # create the database and load test data
     with app.app_context():
@@ -27,20 +35,24 @@ def app():
 
     yield app
 
-    # close and remove the temporary database
-    os.close(db_fd)
-    os.unlink(db_path)
-
 @pytest.fixture
 def client(app):
     """A test client for the app."""
     return app.test_client()
 
-
 @pytest.fixture
 def runner(app):
     """A test runner for the app's Click commands."""
     return app.test_cli_runner()
+
+@pytest.fixture(scope="session", autouse=True)
+def only_teardown():
+    print("this is setup")
+    yield
+    print("this is teardown")
+    # close and remove the temporary database
+    os.close(unique_db_fd)
+    os.unlink(unique_db_path)
 
 def test_servidor_levanta(client):
 
@@ -54,7 +66,6 @@ def test_servidor_levanta(client):
     response = json.loads(rv.data)
 
     assert response['status'] == 'up'
-
 
 def reserva_correcta():
     return {
@@ -103,4 +114,12 @@ def reserva_correcta():
 
 def test_reservar_vuelo(client):
     rv = client.post('/vuelos/reserva', data=json.dumps(reserva_correcta()), content_type='application/json')
+    response = rv.json
     assert rv is not None
+    assert rv.status_code == 200
+    assert len(response["itinerarios"]) == 0
+
+def test_reservar_vuelo_error_informacion_duplicada(client):
+    rv = client.post('/vuelos/reserva', data=json.dumps(reserva_correcta()), content_type='application/json')
+    assert rv is not None
+    assert rv.status_code == 500

@@ -90,3 +90,7 @@ coverage run -m pytest
 ```bash
 coverage report
 ```
+## Diagrama con Flujo Crear Reserva
+A continuación un diagrama mostrando como es el flujo de un request de reservar o crear reserva  a través de las diferentes capas:
+
+![image](https://github.com/user-attachments/assets/70b93bd8-b799-4f96-8a0f-708341d91187)

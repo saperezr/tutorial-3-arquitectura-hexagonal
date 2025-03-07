@@ -20,9 +20,9 @@ from .repositorios import (RepositorioProveedoresSQLite,
 @dataclass
 class FabricaRepositorio(Fabrica):
     def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
-        if obj.__name__ == RepositorioReservas.__name__:
+        if obj == RepositorioReservas:
             return RepositorioReservasSQLite()
-        elif obj.__name__ == RepositorioProveedores.__name__:
+        elif obj == RepositorioProveedores:
             return RepositorioProveedoresSQLite()
         else:
             raise ExcepcionFabrica()

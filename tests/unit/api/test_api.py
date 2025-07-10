@@ -5,7 +5,6 @@ import tempfile
 import pytest
 
 from aeroalpes.api import create_app, importar_modelos_alchemy
-from aeroalpes.config.db import db, init_db
 
 db_dir = os.path.abspath(os.path.dirname(__file__))
 unique_db_path = None
@@ -26,8 +25,6 @@ def app():
 
     # create the database and load test data
     with app.app_context():
-        init_db(app)
-
         from aeroalpes.config.db import db
 
         importar_modelos_alchemy()

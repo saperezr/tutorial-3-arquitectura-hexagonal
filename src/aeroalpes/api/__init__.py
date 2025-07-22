@@ -29,11 +29,9 @@ def create_app(configuracion=None):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
      # Inicializa la DB
-    from aeroalpes.config.db import init_db
+    from aeroalpes.config.db import init_db, db
+    
     init_db(app)
-
-    from aeroalpes.config.db import db
-
     importar_modelos_alchemy()
 
     with app.app_context():

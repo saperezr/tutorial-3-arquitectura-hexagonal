@@ -3,15 +3,20 @@
 Repositorio con código base para el desarrollo de una arquitectura hexagonal siguiendo los principios y patrones de DDD.
 
 
+## Arquitectura
+
+[![](https://img.plantuml.biz/plantuml/png/ZLJ9JiGm3BttAwov01BY6q0iuiW1SKKcyNJCf778mYB4l-Eqj51cAeqlJVpS-FdPoNdA67FfN7C43wmRi0G1NmfbIl242Iq2US3uKZYJoIKYREWTM_7ecYQWsM9Bi4hHhE2p0RN9XnG5NQ0q8dCqy0emWNudq4icYDnkCiXwXbIxzZO8-vpWzlx-3kWz54fP4hmomet3j3sRuidR_hHcDx4Hl-Qsppqi5zB_0wjTzYxLmB1u5UW3q1XA0WWEgrnKzREef0wYGi_K1IUf9pDk5kZim0CXowtKf5tLGflp0I4MKYhLgIKO2baE8jE9BIENd_MVliqbT4m-qse_kj7pdNPzFnfqTXQnIAfiUhJiiMEp6FTA6pOzsGMyq5Z9i9p2lXRK_IbuTjoLTEoLJbNIKojA3LXxG9qMZ_PVTDB1K5Mi03dGNh2Jtvi2nnWSctvkJcU_sI494B1VHwnDBFqrEpceQOd8ladSzhMEcuKQT-1g5qzrRCmqq4M9iqLBzNPqHPspS7qP84cGcD7NcV_xCEmXF4Z-rPohHr-PRm00)](https://editor.plantuml.com/uml/ZLJ9JiGm3BttAwov01BY6q0iuiW1SKKcyNJCf778mYB4l-Eqj51cAeqlJVpS-FdPoNdA67FfN7C43wmRi0G1NmfbIl242Iq2US3uKZYJoIKYREWTM_7ecYQWsM9Bi4hHhE2p0RN9XnG5NQ0q8dCqy0emWNudq4icYDnkCiXwXbIxzZO8-vpWzlx-3kWz54fP4hmomet3j3sRuidR_hHcDx4Hl-Qsppqi5zB_0wjTzYxLmB1u5UW3q1XA0WWEgrnKzREef0wYGi_K1IUf9pDk5kZim0CXowtKf5tLGflp0I4MKYhLgIKO2baE8jE9BIENd_MVliqbT4m-qse_kj7pdNPzFnfqTXQnIAfiUhJiiMEp6FTA6pOzsGMyq5Z9i9p2lXRK_IbuTjoLTEoLJbNIKojA3LXxG9qMZ_PVTDB1K5Mi03dGNh2Jtvi2nnWSctvkJcU_sI494B1VHwnDBFqrEpceQOd8ladSzhMEcuKQT-1g5qzrRCmqq4M9iqLBzNPqHPspS7qP84cGcD7NcV_xCEmXF4Z-rPohHr-PRm00)
+
+
 ## Estructura del proyecto
 
 El repositorio en su raíz está estructurado de la siguiente forma:
 
 - **.github**: Directorio donde se localizan templates para Github y los CI/CD workflows 
+- **.devcontainer/devcontainer.json**: Archivo que define las tareas/pasos a ejecutar para configurar su workspace en Github Codespaces.
 - **src**: En este directorio encuentra el código fuente para AeroAlpes. En la siguiente sección se explica un poco mejor la estructura del mismo ([link](https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure%3E) para más información)
 - **tests**: Directorio con todos los archivos de prueba, tanto unitarios como de integración. Sigue el estándar [recomendado por pytest](https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html) y usado por [boto](https://github.com/boto/boto).
 - **.gitignore**: Archivo con la definición de archivos que se deben ignorar en el repositorio GIT
-- **.gitpod.yml**: Archivo que define las tareas/pasos a ejecutar para configurar su workspace en Gitpod
 - **README.md**: El archivo que está leyendo :)
 - **requirements.txt**: Archivo con los requerimientos para el correcto funcionamiento del proyecto (librerias Python)
 
